@@ -2,16 +2,14 @@ import "./Perfil.css"
 import Card from '@mui/material/Card';
 import { CardContent, Typography, Button} from "@mui/material";
 
+
 function Perfil (props) {
 return (
 
     <div className="perfil">
-        <h1>Perfil</h1>
 
-        <h3>Hola {props.user.userName}!</h3>
-
-        <Card style={{backgroundColor: '#718DA5'}}>
-            <CardContent>
+        <Card style={{backgroundColor: '#26BBB1'}}>
+            <CardContent >
                 <Typography sx={{ fontSize: 24 }} style={{marginLeft: 100}} >
                     Información:
                 </Typography>
