@@ -7,16 +7,17 @@ import Home from './Components/Home/Home';
 import Footer from './Components/Footer/Footer'
 import Catalog from './Components/Catalog/Catalog';
 import AboutUs from './Components/AboutUs/AboutUs';
-import BuyerProfile from './Components/buyerProfile/buyerProfile';
+import BuyerProfile from './Components/buyerProfile/BuyerProfile';
 import SellerProfile from './Components/SellerProfile/sellerProfile';
-import ShoppingCart  from './Components/ShoppingCart/shoppingCart';
+import ShoppingCart from './Components/ShoppingCart/shoppingCart';
+
 
 function App() {
   return (
     <Router>
       <NavBar/>
       <Routes>
-        <Route  path="/" exact element={<Home/>} />
+        <Route  path="/home" exact element={<Home/>} />
         <Route  path="/sobreNosotros" element={<AboutUs/>} />
         <Route  path="/catalogoProductos" element={<Catalog/>} />
         <Route  path="/catalogoProductos" element={<Catalog/>} />
