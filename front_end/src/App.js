@@ -10,6 +10,8 @@ import AboutUs from './Components/AboutUs/AboutUs';
 import BuyerProfile from './Components/buyerProfile/buyerProfile';
 import SellerProfile from './Components/SellerProfile/sellerProfile';
 import ShoppingCart  from './Components/ShoppingCart/shoppingCart';
+import Login from './Components/Login/login';
+import Registro from './Components/Login/registro';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route  path="/vendedor" element={<SellerProfile/>} />
         <Route  path="/comprador" element={<BuyerProfile/>} />
         <Route  path="/carrito" element={<ShoppingCart/>} />
+        <Route  path="/login" element={<Login/>} />
+        <Route  path="/registro" element={<Registro/>} />
       </Routes>
     <Footer/>
   </Router>

@@ -38,9 +38,11 @@ export default class NavBar extends Component {
                             <NavLink className={'btnNav'} to={'/'}>Inicio</NavLink>
                             <NavLink className={'btnNav'} to={'/catalogoProductos'}>Catalogo</NavLink>
                             <NavLink className={'btnNav'} to={'/sobreNosotros'}>Sobre Nosotros</NavLink>
-                            <Button className='btnPerfil'> 
+                            
+                            <Button onClick={'/login'} className='btnPerfil'> 
                                 <FontAwesomeIcon icon={faUser}/>
                             </Button>
+                        
                         </Nav>
                     </Navbar.Collapse>
                     
