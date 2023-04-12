@@ -1,5 +1,4 @@
-import Card from '@mui/material/Card';
-import { CardContent, Typography, Button} from "@mui/material";
+import { CardContent, Card} from "@mui/material";
 import { GiPineapple, GiTomato} from "react-icons/gi";
 
 
@@ -20,12 +19,7 @@ function CategoriaDeseada() {
                 </CardContent>
             </Card>
 
-            
-
-        <Button style={{backgroundColor: '#1976D2', marginTop: 50, marginLeft: 500, color:'black'}} >
-            Editar información
-        </Button>
-    </div>
+        </div>
 
 
     )

@@ -1,6 +1,8 @@
 .iconoPerfil{
     border-radius: 50%;
     height: 100px;
+    margin-right: 50px;
+    margin-left: 10px;
 }
 
 .informacion{

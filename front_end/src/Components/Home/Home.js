@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import CategoriaDeseada from './CategoriaDestacada';
+import CategoriaDestacada from './CategoriaDestacada';
+import InformacionVendedor from './InformacionVendedor';
 
 export default class home extends Component {
   render() {
     return (
       <div>
-        <CategoriaDeseada/>
+        <CategoriaDestacada />
+        <InformacionVendedor />
       </div>
     )
   }

@@ -4,8 +4,12 @@ import Perfil from './Perfil';
 import HistorialCompras from './HistorialCompras';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import IconoPerfil from './images/perfil.jpg';
+import IconoPerfil from './images/IconoPerfil.png';
 import { useState } from 'react';
+import ServicioImagen from './SubirImagen';
+
+
+
 
 
 
@@ -50,17 +54,24 @@ function BuyerProfile() {
     <div className='BuyerProfile' >
       {showUserFormIsShown && <UserForm onCloseUserForm={hideUserFormHandler}/>}
       
+      <img  className="iconoPerfil" id='imgPerfil'/>
+      <ServicioImagen className='iconoPerfil' />
 
-      <h1>Perfil</h1>
-      <img src={IconoPerfil} className="iconoPerfil"/>
       <h3 className="saludoPerfil">Hola {usuario.name}!</h3>
+      
+      
+      
+      
+      
+      
 
       <Tabs
           defaultActiveKey="profileBuyer"
           id="profileBuyer"
           activeKey={key}
           onSelect={(k) => setKey(k)}
-          style={{backgroundColor: 'white'}}
+          style={{backgroundColor: 'white', marginTop:'30px'}}
+
   >
           <Tab eventKey="detalles" title="DETALLES">
             <Perfil
