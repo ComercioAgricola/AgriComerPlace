@@ -6,13 +6,14 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import IconoPerfil from './images/IconoPerfil.png';
 import { useState } from 'react';
-import ServicioImagen from './SubirImagen';
+import zIndex from '@mui/material/styles/zIndex';
 
 
 
 
 
 
+var url;
 
 
 const usuario = {
@@ -50,21 +51,21 @@ function BuyerProfile() {
   };
   
   const  [key, setKey] = useState('detalles');
-  return (
-    <div className='BuyerProfile' >
-      {showUserFormIsShown && <UserForm onCloseUserForm={hideUserFormHandler}/>}
-      
-      <img  className="iconoPerfil" id='imgPerfil'/>
-      <ServicioImagen className='iconoPerfil' />
 
+  const [image, setImage] = useState();
+
+  return (
+    <div className='BuyerProfile'  >
+      {showUserFormIsShown && <UserForm onSetImage={setImage} onCloseUserForm={hideUserFormHandler}/>}
+
+      <div>
+        <img src={IconoPerfil} className='iconoPerfil1' />
+        <img src={image} className="iconoPerfil2" id='imgPerfil'/>
+      </div>
+      
       <h3 className="saludoPerfil">Hola {usuario.name}!</h3>
       
       
-      
-      
-      
-      
-
       <Tabs
           defaultActiveKey="profileBuyer"
           id="profileBuyer"

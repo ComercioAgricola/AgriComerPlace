@@ -1,15 +1,17 @@
-import { Container} from '@mui/material';
-import React, { useState } from 'react';
-
-//import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import InputStyle from './Input.module.css';
 
 
 function SubirImagen(props) {
+    
     const  [image,setImage] = useState("");
-
 
     
     const [loading,setLoading] = useState(false);
+
+    useEffect(() => {
+        props.onSetImage([image]);
+    }, [image]);
 
     const uploadImage = async (e) => {
         const files = e.target.files;
@@ -33,9 +35,8 @@ function SubirImagen(props) {
 
     return(
         <div>
-            <img src={image} className='iconoPerfil'/>
 
-            <input 
+            <input style={{marginTop:'30px', marginLeft:'95px'}}
                 type='file' 
                 name='file' 
                 placeholder='subir imagen'
@@ -48,5 +49,6 @@ function SubirImagen(props) {
 
     );
 }
+
 
 export default SubirImagen;

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -8,7 +8,7 @@ import Modal from './Modal';
 import FormStyle from './FormStyle.module.css';
 import InputStyle from './Input.module.css';
 import TextField from '@mui/material/TextField';
-import { maxHeight } from '@mui/system';
+import ServicioImagen from './SubirImagen'
 
 
 const bull = (
@@ -21,6 +21,7 @@ const bull = (
 );
 
 export default function UserForm(props) {
+  
   return (
     <Modal onCloseUserForm={props.onCloseUserForm}>
     <Card sx={{ height: 400, overflowY: 'scroll' }}>
@@ -37,6 +38,13 @@ export default function UserForm(props) {
 
             <label htmlFor='idCelular' className={InputStyle.inputLabel}>Celular: </label> 
             <TextField id="idCelular" label="celular"  />
+
+            <a >
+              <ServicioImagen
+                onSetImage={props.onSetImage}
+              />
+            </a>
+            
 
 
             <Button 

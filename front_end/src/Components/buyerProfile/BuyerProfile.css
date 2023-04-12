@@ -1,8 +1,14 @@
-.iconoPerfil{
+.iconoPerfil1{
     border-radius: 50%;
     height: 100px;
-    margin-right: 50px;
-    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.iconoPerfil2{
+    border-radius: 50%;
+    height: 115px;
+    margin-left: -98px;
+    margin-top: 10px;
 }
 
 .informacion{
