@@ -11,8 +11,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import '../Login/registro.css'
-import { Link as RouteLink, useNavigate} from 'react-router-dom';
-import{auth} from '../Login/firebase';
+import { Link as RouteLink, useNavigate } from 'react-router-dom';
+import { auth } from '../Login/firebase';
 
 function Copyright(props) {
   return (
@@ -33,20 +33,25 @@ export default function Registro() {
 
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
-  const navigate =useNavigate();
- 
+  const navigate = useNavigate();
+
+  const [checkComprador, setCheckComprador] = useState(true);
+  const [checkVendedor, setCheckVendedor] = useState(false);
+  const activarComprador=() =>{setCheckComprador=true; setCheckVendedor=false};
+  const activarVendedor=() =>{setCheckVendedor= true; setCheckComprador=false};
+
   const registro = (e) => {
     e.preventDefault();
-    auth.createUserWitnEmailAndPassword(correo,contraseña).then((auth)=>{
+    auth.createUserWitnEmailAndPassword(correo, contraseña).then((auth) => {
       console.log(auth);
-      if(auth){
+      if (auth) {
         navigate('/path');
 
       }
-    }).catch(err=> alert(err.message))
+    }).catch(err => alert(err.message))
   }
 
- 
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -58,22 +63,40 @@ export default function Registro() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="s" className="containerRegistro">
         <CssBaseline />
         <Box
+          className="boxRegistro"
           sx={{
-            marginTop: 8,
+            marginTop: 5,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            width: "50%" 
           }}
         >
           <Typography component="h1" variant="h5">
             Registro
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 4 }}>
+            <Grid container spacing={3}>
+
+              <Grid item xs={12} >
+                <Typography >
+                Seleccione el Tipo de usuario:
+                </Typography>
+
+                <FormControlLabel
+                  control={<Checkbox value="usuarioComprador" color="primary" checked={checkComprador} defaultChecked onChange={activarVendedor}/> }
+                  label="Comprador"
+                />
+                <FormControlLabel
+                  control={<Checkbox value="usuarioVendedor" color="primary" checked={checkVendedor} onChange={activarComprador} />}
+                  label="Vendedor"
+                />
+
+              </Grid>
+              <Grid item xs={18} sm={4}>
                 <TextField
                   autoComplete="given-name"
                   name="nombre"
@@ -84,13 +107,43 @@ export default function Registro() {
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={18} sm={4}>
                 <TextField
                   required
                   fullWidth
                   id="apellidos"
                   label="Apellidos"
                   name="apellidos"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={18}sm={4}>
+                <TextField
+                  required
+                  fullWidth
+                  id="telefono"
+                  label="Telefono"
+                  name="telefono"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} >
+                <TextField
+                  required
+                  fullWidth
+                  id="ubicacion"
+                  label="Ubicacion"
+                  name="ubicacion"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} >
+                <TextField
+                  required
+                  fullWidth
+                  id="nombreNegocio"
+                  label="Nombre del negocio"
+                  name="nombreNegocio"
                   autoComplete="family-name"
                 />
               </Grid>
@@ -101,7 +154,7 @@ export default function Registro() {
                   required
                   fullWidth
                   id="correo"
-                  label="correo electronico"
+                  label="Correo electronico"
                   name="correo electronico"
                   autoComplete="correo electronico"
                 />
@@ -113,7 +166,7 @@ export default function Registro() {
                   required
                   fullWidth
                   name="contraseña"
-                  label="contraseña"
+                  label="Contraseña"
                   type="contraseña"
                   id="contraseña"
                   autoComplete="nueva contraseña"
