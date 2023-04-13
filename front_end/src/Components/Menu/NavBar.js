@@ -28,10 +28,12 @@ export default class NavBar extends Component {
                         >
                             <Form.Control className="search-textField" type="email" placeholder="name@example.com" />
                         </FloatingLabel>
-                        <Button className='btnSearch' type="submit">
+                        <Button 
+                        className='btnSearch' type="submit">
                            <FontAwesomeIcon icon={faMagnifyingGlass}/>
                         </Button>
                     </Form>
+                    
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll" className="btns-nav">
                         <Nav navbarScroll>

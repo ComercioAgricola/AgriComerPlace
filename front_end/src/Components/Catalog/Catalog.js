@@ -1,13 +1,25 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
+import { getAllProducts } from "../../Services/product.service";
+import ImgCargando  from "../Catalog/imgCargando"
+import ListCardsProducts from "../Catalog/listCardsProducts"
 
-export default class catalog extends Component {
-  render() {
-    return (
-      <div>
-        <h1>
-          Catalogo
-        </h1>
-      </div>
-    )
+export default function Proveedores() {
+
+  const [products, setListProducts] = useState([]);
+
+  useEffect(() => {
+    const getAllProductsDB = async () => {
+
+      const productsDB = await getAllProducts();
+      setListProducts(productsDB.data.result);
   }
+  getAllProductsDB();
+  }, []) 
+   
+  return (
+    <div>
+      <h1>Catalogo</h1>
+      {products.length !== 0 ? <ListCardsProducts products={products}/>:<ImgCargando/>}
+    </div>
+  )
 }

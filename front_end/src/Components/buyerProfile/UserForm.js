@@ -39,6 +39,7 @@ export default function UserForm(props) {
             <label htmlFor='idCelular' className={InputStyle.inputLabel}>Celular: </label> 
             <TextField id="idCelular" label="celular"  />
 
+            <label htmlFor='idFoto' className={InputStyle.inputLabel}>Selecciona tu foto de peril aquí: </label> 
             <a >
               <ServicioImagen
                 onSetImage={props.onSetImage}

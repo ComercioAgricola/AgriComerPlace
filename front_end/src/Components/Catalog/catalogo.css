@@ -1,0 +1,48 @@
+.imgCargando {
+    height: 150px;
+    width: 150px;
+    animation-name: girar;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.div-imgCargando{
+    display: flex;
+    justify-content: center;
+}
+
+.cardColor{
+    background-color: #ccc !important;
+}
+.conteiner-card{
+    display: flex !important;
+    justify-content: center !important;
+}
+.btnCard{
+    display: flex;
+    text-align: center !important;
+    border-radius: 20px;
+    color: white;
+    background-color: #265073 !important;
+    font-size: 10px;
+    width: 130px;
+    height: 40px;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.btnCard:hover{
+    border-color: black;
+    font-size: 18px;
+    color: #265073 !important;
+    background-color: white !important;
+    border: 2px solid #265073 !important;
+}
