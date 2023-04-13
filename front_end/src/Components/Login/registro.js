@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -10,9 +10,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import LogoInicio from '../../Assets/logologin.svg';
 import '../Login/registro.css'
-import {Link as RouteLink} from 'react-router-dom';
+import { Link as RouteLink, useNavigate} from 'react-router-dom';
+import{auth} from '../Login/firebase';
 
 function Copyright(props) {
   return (
@@ -30,6 +30,23 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Registro() {
+
+  const [correo, setCorreo] = useState("");
+  const [contraseña, setContraseña] = useState("");
+  const navigate =useNavigate();
+ 
+  const registro = (e) => {
+    e.preventDefault();
+    auth.createUserWitnEmailAndPassword(correo,contraseña).then((auth)=>{
+      console.log(auth);
+      if(auth){
+        navigate('/path');
+
+      }
+    }).catch(err=> alert(err.message))
+  }
+
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -51,7 +68,6 @@ export default function Registro() {
             alignItems: 'center',
           }}
         >
-         <img src={LogoInicio} className="logo2" alt="AgroMarketPlace" />
           <Typography component="h1" variant="h5">
             Registro
           </Typography>
@@ -80,6 +96,8 @@ export default function Registro() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  value={correo}
+                  onChange={e => setCorreo(e.target.value)}
                   required
                   fullWidth
                   id="correo"
@@ -90,6 +108,8 @@ export default function Registro() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  value={contraseña}
+                  onChange={e => setContraseña(e.target.value)}
                   required
                   fullWidth
                   name="contraseña"
@@ -112,18 +132,14 @@ export default function Registro() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={registro}
             >
               Registrate
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-             <RouteLink to="../login">
+            <RouteLink to="../login" className='enlaces'>
               ¿Ya tienes una cuenta? Inicia Sesion.
-             </RouteLink>
-                  
-               
-              </Grid>
-            </Grid>
+            </RouteLink>
+
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />

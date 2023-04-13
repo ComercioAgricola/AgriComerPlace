@@ -12,7 +12,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LogoInicio from '../../Assets/logologin.svg';
 import '../Login/login.css'
-import {Link as RouteLink} from 'react-router-dom';
+import { Link as RouteLink, useHistory } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -30,6 +30,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function login() {
+
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -45,19 +47,15 @@ export default function login() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-         
-          
-            <img src={LogoInicio} className="logo2" alt="AgroMarketPlace" />
-        
-          <Typography component="h1" variant="h5">
-            Iniciar Sesion
-          </Typography>
+
+          <img src={LogoInicio} className="logo2" alt="AgroMarketPlace" />
+
+
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -83,27 +81,12 @@ export default function login() {
               control={<Checkbox value="remember" color="primary" />}
               label="Recordarme"
             />
-            <Button 
-              className='btnLogin'
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Iniciar Sesion
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  ¿Olvidaste tu contraseña?
-                </Link>
-              </Grid>
-              <Grid item>
-              <RouteLink to="../registro">
+            <RouteLink to="" className='enlaces'>
+              ¿Olvidaste tu contraseña?
+            </RouteLink>
+            <RouteLink to="../registro" className='enlaces'>
               {"¿No tienes una cuenta? Registrate"}
-              </RouteLink>
-              </Grid>
-            </Grid>
+            </RouteLink>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
