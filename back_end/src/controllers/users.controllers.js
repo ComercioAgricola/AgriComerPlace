@@ -18,9 +18,8 @@ module.exports = class BuyersController {
             const { type, name, email, password, telephone, location, urlImg, address, storeName, storeDescription, accountNumber } = req.body;
 
             const userFound = await user.findOne({ email: email })
-
             if (userFound != null) {
-                return res.status(404).json({ success: false, mensaje: 'the buyer user does not exist' });
+                return res.status(404).json({ success: false, mensaje: 'Ya existe un usuario con el correo ingresado' });
             }
 
             const newUser = new user({

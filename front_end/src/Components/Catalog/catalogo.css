@@ -16,7 +16,10 @@
 
 .div-imgCargando{
     display: flex;
+    align-items: center;
     justify-content: center;
+    height: 50vh;
+    width: 100vw;
 }
 
 .cardColor{
