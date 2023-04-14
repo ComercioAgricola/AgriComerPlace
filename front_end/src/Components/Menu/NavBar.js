@@ -15,15 +15,12 @@ import Login from '../Login/login';
 import '../Login/login.css'
 
 export default function NavBar() {
-
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    return (
-        <Navbar className='nav' expand="lg">
-
-            <Modal show={show} onHide={handleClose}>
+        return (
+            <Navbar className='nav' expand="lg">
+             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                 
                 </Modal.Header>
@@ -31,7 +28,35 @@ export default function NavBar() {
                     <Login></Login>
                 </Modal.Body>
                 <Modal.Footer className='footermodel'>
+                <Container fluid>
+                    <NavLink to={'/'}>
+                        <img src={LogoNav} className="logo" alt="AgroMarketPlace" />
+                    </NavLink>
+                    <Form className="d-flex">
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Ingresa el nombre del producto"
+                            className="search-textField"
+                        >
+                            <Form.Control className="search-textField" type="email" placeholder="name@example.com" />
+                        </FloatingLabel>
+                        <Button 
+                        className='btnSearch' type="submit">
+                           <FontAwesomeIcon icon={faMagnifyingGlass}/>
+                        </Button>
+                    </Form>
                     
+                    <Navbar.Toggle aria-controls="navbarScroll" />
+                    <Navbar.Collapse id="navbarScroll" className="btns-nav">
+                        <Nav navbarScroll>
+                            <NavLink className={'btnNav'} to={'/'}>Inicio</NavLink>
+                            <NavLink className={'btnNav'} to={'/catalogoProductos'}>Catalogo</NavLink>
+                            <NavLink className={'btnNav'} to={'/sobreNosotros'}>Sobre Nosotros</NavLink>
+                            <Button className='btnPerfil'> 
+                                <FontAwesomeIcon icon={faUser}/>
+                            </Button>
+                        </Nav>
+                    </Navbar.Collapse>                    
                     <Button onClick={handleClose}
                         className='btnLogin2'
                         type="submit"
