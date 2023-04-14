@@ -1,0 +1,8 @@
+PUT http://localhost:5000/api/buyer/id/642f0faa2bfe31396e2d5754
+content-type: application/json
+
+{
+    "name" : "robin",
+    "password" : "123456789",
+    "telephone" : 3202148078
+}
