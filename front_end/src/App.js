@@ -9,6 +9,8 @@ import Catalog from './Components/Catalog/Catalog';
 import AboutUs from './Components/AboutUs/AboutUs';
 import BuyerProfile from './Components/buyerProfile/buyerProfile';
 import SellerProfile from './Components/SellerProfile/sellerProfile';
+import Registro from './Components/Login/registro';
+
 import ShoppingCart from './Components/ShoppingCart/shoppingCart';
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
           <Route path="/vendedor" element={<SellerProfile />} />
           <Route path="/comprador" element={<BuyerProfile />} />
           <Route path="/carrito" element={<ShoppingCart />} />
+          <Route  path="/registro" element={<Registro/>} />
         </Routes>
       </Router>
       <Footer />
