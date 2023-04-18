@@ -1,24 +1,14 @@
-import React, {useState} from 'react';
-import Box from '@mui/material/Box';
+import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from './Modal';
-import FormStyle from './FormStyle.module.css';
 import InputStyle from './Input.module.css';
 import TextField from '@mui/material/TextField';
-import ServicioImagen from './SubirImagen'
 
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
+
 
 export default function UserForm(props) {
   
@@ -40,11 +30,7 @@ export default function UserForm(props) {
             <TextField id="idCelular" label="celular"  />
 
             <label htmlFor='idFoto' className={InputStyle.inputLabel}>Selecciona tu foto de peril aquí: </label> 
-            <a >
-              <ServicioImagen
-                onSetImage={props.onSetImage}
-              />
-            </a>
+
             
 
 

@@ -7,3 +7,13 @@ footer{
     color: white;
     background-color:#2393AE;
 }
+
+@media (max-width: 400px) {
+  
+    footer{
+        display: flex;
+       font-size: 0.7em;
+       align-items: center;
+       justify-content: center;
+    }
+}

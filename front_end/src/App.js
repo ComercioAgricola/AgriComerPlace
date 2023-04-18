@@ -10,26 +10,25 @@ import AboutUs from './Components/AboutUs/AboutUs';
 import BuyerProfile from './Components/buyerProfile/buyerProfile';
 import SellerProfile from './Components/SellerProfile/sellerProfile';
 import Registro from './Components/Login/registro';
-
 import ShoppingCart from './Components/ShoppingCart/shoppingCart';
 
 function App() {
   return (
     <div className='body'>
       <Router>
-        <NavBar />
-        <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/sobreNosotros" element={<AboutUs />} />
-          <Route path="/catalogoProductos" element={<Catalog />} />
-          <Route path="/catalogoProductos" element={<Catalog />} />
-          <Route path="/vendedor" element={<SellerProfile />} />
-          <Route path="/comprador" element={<BuyerProfile />} />
-          <Route path="/carrito" element={<ShoppingCart />} />
-          <Route  path="/registro" element={<Registro/>} />
-        </Routes>
-      </Router>
-      <Footer />
+          <NavBar />
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/sobreNosotros" element={<AboutUs />} />
+            <Route path="/catalogoProductos" element={<Catalog />} />
+            <Route path="/catalogoProductos" element={<Catalog />} />
+            <Route path="/mi_negocio/:idSeller" element={<SellerProfile />} />
+            <Route path="/mi_perfil/:idBuyer" element={<BuyerProfile />} />
+            <Route path="/carrito" element={<ShoppingCart />} />
+            <Route path="/registro" element={<Registro />} />
+          </Routes>
+        </Router>
+        <Footer />
     </div>
 
   );

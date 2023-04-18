@@ -3,7 +3,7 @@ const router = Router();
 const usersController = require('../controllers/users.controllers')
 
 
-router.post("/signup",usersController.singUp);
+router.post("/signup/",usersController.singUp);
 router.get("/confirm/:token", usersController.confirmSingUp);
 router.get("/signin/:email/:password",usersController.singIn);
 router.get("/all",usersController.getAllUsers)

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import InputStyle from './Input.module.css';
 
 
 function SubirImagen(props) {

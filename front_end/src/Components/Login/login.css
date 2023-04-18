@@ -8,10 +8,11 @@
     text-align: center !important;
     color: white !important;
     padding: 3px;
-    font-size: 20px !important;
+    font-size: 18px !important;
 }
 
 .footermodel {
+    margin-top: 20px;
     display: flex !important;
     justify-content: center !important;
 }
@@ -19,4 +20,8 @@
 .enlaces{
     display: block;
     text-align: center;
+}
+
+.textfiel-login{
+    width: 100%;
 }

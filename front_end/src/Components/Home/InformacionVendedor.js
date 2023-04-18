@@ -1,5 +1,5 @@
 import { CardContent, Card, colors} from "@mui/material";
-import VendedorImg from '/Users/ximena/Desktop/soft3/AgroMarketPlace/AgriComerPlace/front_end/src/Assets/infoVendedor.png';
+import VendedorImg from '../../Assets/infoVendedor.png';
 import { alignPropType } from "react-bootstrap/esm/types";
 
 

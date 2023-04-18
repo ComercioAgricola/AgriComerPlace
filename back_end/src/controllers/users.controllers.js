@@ -15,13 +15,12 @@ module.exports = class BuyersController {
 
     static async singUp(req, res) {
         try {
-            const { type, name, email, password, telephone, location, urlImg, address, storeName, storeDescription, accountNumber } = req.body;
 
+            const { type, name, email, password, telephone, location, urlImg, address, storeName, storeDescription, accountNumber } = req.body;
             const userFound = await user.findOne({ email: email })
             if (userFound != null) {
-                return res.status(404).json({ success: false, mensaje: 'Ya existe un usuario con el correo ingresado' });
+                return res.status(202).json({ success: false, mensaje: 'Ya existe un usuario con el correo ingresado' });
             }
-
             const newUser = new user({
                 type: type,
                 name: name,
@@ -54,11 +53,11 @@ module.exports = class BuyersController {
                 });
                 await newSeller.save();
             }
+            return res.status(200).json({ success: true, msg: 'Registro exitoso' });
 
-            res.status(200).json({ success: true, msg: 'Registro exitoso' });
 
         } catch (error) {
-            res.status(404).json({ success: false, msg: err.message });
+            res.status(404).json({ success: false, msg: error.message });
         }
     }
 
@@ -97,17 +96,17 @@ module.exports = class BuyersController {
                 if (match) {
                     const token = jwt.sign({ id: userFound._id }, process.env.JWT_SECRET)
                     if (userFound.type != "SELLER") {
-                        const buyerData = await buyer.findOne({ user_id: userFound._id });
-                        res.status(200).json({ success: true, msg: 'Inicio de sesion exitoso', userFound, buyerData, token });
+                        const dataUser = await buyer.findOne({ user_id: userFound._id });
+                        return res.status(200).json({ success: true, msg: 'Inicio de sesion exitoso',userFound, dataUser, token });
                     } else {
-                        const sellerData = await seller.findOne({ user_id: userFound._id });    
-                        res.status(200).json({success: true, msg: 'Inicio de sesion exitoso', userFound, sellerData, token });
+                        const dataUser = await seller.findOne({ user_id: userFound._id });   
+                        return res.status(200).json({success: true, msg: 'Inicio de sesion exitoso', userFound,dataUser, token });
                     }
                 } else {
-                    res.status(401).json({ success: false, msg: 'la password no coincide' })
+                    return res.status(401).json({ success: false, msg: 'la password no coincide' })
                 }
             }else{
-                res.status(401).json({ success: false, msg: 'usuario no verificado'})
+                return res.status(401).json({ success: false, msg: 'usuario no verificado'})
             }
         } catch (error) {
             return res.status(404).json({ success: false, msg: 'Error al iniciar sesion ' + error.message });

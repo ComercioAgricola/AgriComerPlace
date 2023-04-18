@@ -7,3 +7,9 @@
     display: block !important;
     text-align: center !important;
 }
+
+.containerRegistro{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}

@@ -1,6 +1,6 @@
 .nav{
-    background-color: #2393AE;
     text-align: center;
+    background-color: #2393AE;
 }
 
 .logo{
@@ -9,26 +9,32 @@
     margin-right: 50px;
 }
 
+.width{
+    width: 100%;
+}
+
 .btnNav{
     display: flex;
     text-align: center;
-    text-decoration: none;
-    border-radius: 20px;
-    color: white;
-    background-color: #265073;
-    margin-left: 10px;
-    font-size: 15px;
-    width: 130px;
-    height: 50px;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    
+    height: 50px;
+    width: 130px;
+    font-size: 15px;
+    margin-left: 10px;
+    text-decoration: none;
+    font-weight: bold !important;
+    
+    color: white;
+    border-radius: 20px !important;
+    background-color: #265073 !important;
 }
 .btnNav:hover{
-    border-color: black;
-    font-size: 18px;
-    color: #265073;
-    background-color: white;
-    border: 2px solid #265073;
+    color: #265073 !important;
+    border-color: black !important;
+    background-color: white !important;
+    border: 2px solid #265073!important;
 }
 
 
@@ -37,75 +43,57 @@
     justify-content: flex-end !important;
 }
 .search-textField{
-    width: 500px;
+    width: 450px;
     height: 50px !important; 
     border-radius: 20px 0 0 20px !important;
 }
 .btnSearch{
+    width: 50px;
+    height: 50px;
     font-size: 20px !important;
-    border-radius: 20px;
-    font-size: 15px !important;
+
     color: #CBEAE2;
     background-color: #265073 !important;
-    height: 50px;
     border-radius: 0px 10px 10px 0px !important;
-    width: 50px;
 
 }
 .btnSearch:hover{
     font-size: 25px !important;
 }
 .btnPerfil{
-    color: #CBEAE2;
-    border-radius: 100% !important;
     width: 50px;
     height: 50px;
     margin-left: 50px;
+
+    color: #CBEAE2;
+    border-radius: 100% !important;
     background-color: #265073 !important;
 }
 
-
-
-@media (max-width: 1450px) {
-    .logo{
-        margin-right: 50px;
-    }
-    .btnPerfil{
-        margin-left: 5px;
-    }
-   
-    .search-textField{
-        width: 550px;
-    }
-    .logo{
-        width: 200px;
-        height: 50px;
-    }
-}
-
-@media (max-width: 1370px) {
-  
+@media (max-width: 1430px) {
     .search-textField{
         width: 400px;
     }
 }
 
-@media (max-width: 1210px) {
-    .search-textField{
-        width: 250px;
-    }
+@media (max-width: 1380px) {
     .btnNav{
-        font-size: 15px;
+        font-size: 15px !important;
         width: 100px;
     }
 }
+@media (max-width: 1260px) {
+    .logo{
+        margin: 10px;
+    }
+    .search-textField{
+        width: 320px;
+    }
+}
 
-@media (max-width: 999px) {
+@media (max-width: 1199px) {
     .search-textField{
         width: 500px;
-    }
-    .logo{
-        margin: 0;
     }
     .btnNav{
         width: 95vmax;
@@ -118,16 +106,18 @@
         border-radius: 20px !important;
     }
 }
-@media (max-width: 700px) {
 
-    
-    .btnNav{
-        width: 95vw;
-        
+
+@media (max-width: 1000px) {    
+    .search-textField{
+        width: 300px;
     }
-    .btnPerfil{
-        width:  95vw;
-       
+}
+
+@media (max-width: 800px) {
+
+    .width{
+        width: 100%;
     }
 }
 @media (max-width: 500px) {
