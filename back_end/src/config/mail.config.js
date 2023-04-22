@@ -42,10 +42,10 @@ const getTemplate = (name, token) => {
     <body>
         <h1>Verificación de correo electrónico</h1>
         <p>Hola ${name},</p>
-        <p>Gracias por registrarte en nuestro sitio. Para verificar tu correo electrónico, por favor haz clic en el enlace de abajo:</p>
+        <p>Gracias por registrarte en nuestro sitio. Para verificar tu correo electrónico, por favor haz clic en el siguiente enlace:</p>
         <a href="http://localhost:5000/api/user/confirm/${token}" target="_blank">Haz click AQUI para verificar tu correo</a>
         <p>Si no has creado una cuenta en nuestro sitio, por favor ignora este mensaje.</p>
-        <p>Gracias,</p>
+        <p>Gracias.</p>
         <p>El equipo de AgroMarketPlace</p>
     </body>
     `

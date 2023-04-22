@@ -1,3 +1,27 @@
-.informacionVendedor {
-
+.color{
+    background-color: yellowgreen;
+    width: 100%;
+    height:100vh;
+}
+.head-offCanva{
+    color: white;
+    height: 85px;
+    background-color: #2393AE !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+}
+.btnCategoryHighlighted{
+    font-size: 1.5em;
+    color: white !important;
+    background-color: #265073 !important;
+}
+.btnCategory{
+    height: 50px;
+    width: 100%;
+    font-size: 25px;
+    color: white !important;
+    background-color: #265073 !important;
+    margin-bottom: 10px;
 }

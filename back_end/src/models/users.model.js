@@ -39,7 +39,7 @@ const UserSchema = new Schema({
         require: true,
         enum: ["UNVERIFIED", "VERIFIED"],
         default: "UNVERIFIED",
-    }
+    },
 })
 
 UserSchema.set('toJSON',{

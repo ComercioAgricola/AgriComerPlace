@@ -6,14 +6,15 @@ footer{
     text-align: center;
     color: white;
     background-color:#2393AE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   
     footer{
-        display: flex;
-       font-size: 0.7em;
-       align-items: center;
-       justify-content: center;
+       font-size: 0.8em;
+     
     }
 }

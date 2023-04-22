@@ -4,7 +4,7 @@ content-type: application/json
 {
    "type": "SELLER",
    "name": "karl",
-   "email": "miguelnieto.08@gmail.com",
+   "email": "miguelnietoo.08@gmail.com",
    "password": "123",
    "telephone": "3118526979",
    "location": "colombia",

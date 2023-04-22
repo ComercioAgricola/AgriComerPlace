@@ -96,11 +96,11 @@ module.exports = class BuyersController {
                 if (match) {
                     const token = jwt.sign({ id: userFound._id }, process.env.JWT_SECRET)
                     if (userFound.type != "SELLER") {
-                        const dataUser = await buyer.findOne({ user_id: userFound._id });
-                        return res.status(200).json({ success: true, msg: 'Inicio de sesion exitoso',userFound, dataUser, token });
+                        const dataBuyer = await buyer.findOne({ user_id: userFound._id });
+                        return res.status(200).json({ success: true, msg: 'Inicio de sesion exitoso',userFound, dataBuyer, token });
                     } else {
-                        const dataUser = await seller.findOne({ user_id: userFound._id });   
-                        return res.status(200).json({success: true, msg: 'Inicio de sesion exitoso', userFound,dataUser, token });
+                        const dataSeller = await seller.findOne({ user_id: userFound._id });   
+                        return res.status(200).json({success: true, msg: 'Inicio de sesion exitoso', userFound,dataSeller, token });
                     }
                 } else {
                     return res.status(401).json({ success: false, msg: 'la password no coincide' })

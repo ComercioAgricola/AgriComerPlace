@@ -7,7 +7,7 @@ function InformacionVendedor() {
     return(
         <div className="informacionVendedor" >
 
-            <Card style={{backgroundColor: '#CBEAE2',width:'1300px', marginLeft:'27px', marginTop:'20px'}}>
+            {/* <Card style={{backgroundColor: '#CBEAE2',width:'1300px', marginLeft:'27px', marginTop:'20px'}}>
                 <CardContent style={{fontSize: '22px', alignContent:'left'}}>
                     <p style={{color: '#265073', textAlign: 'left'}}>
                         Si estás interesado en convertirte en vendedor en AgroMarketPlace, 
@@ -47,7 +47,7 @@ function InformacionVendedor() {
 
                         
                     </CardContent>
-            </Card>
+            </Card> */}
 
         </div>
 

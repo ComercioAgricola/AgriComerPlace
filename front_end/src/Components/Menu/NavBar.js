@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import LogoInicio from '../../Assets/logologin.svg';
 import { Link as RouteLink } from 'react-router-dom';
 import { singIn } from "../../Services/user.service";
+import LogoSmallNav from '../../Assets/small_logo.svg';
 import LogoNav from '../../Assets/LogoMarketShop.svg';
 
 import Nav from 'react-bootstrap/Nav';
@@ -51,6 +52,7 @@ export default function NavBar() {
         height: undefined,
     });
 
+
     useEffect(() => {
         function handleResize() {
             setWindowSize({
@@ -73,7 +75,6 @@ export default function NavBar() {
         event.preventDefault();
         try {
             const res = (await singIn(userEmail, userPassword)).data;
-            console.log(res)
             cookies.set("token", res.token, { path: '/' })
             cookies.set("isAuthenticate", true, { path: '/' })
             cookies.set("userData", res.dataUser, { path: '/' })
@@ -81,15 +82,16 @@ export default function NavBar() {
             cookies.set("userSession", res.userFound, { path: '/' })
             cookies.set("userType", res.userFound.type, { path: '/' })
 
-           // res.userFound.type === "SELLER"
-           //     ? window.location.href = "/mi_negocio/" + res.dataUser._id
-           //     : window.location.href = "/mi_perfil/" + res.dataUser._id
+            res.userFound.type === "SELLER"
+                ? window.location.href = "/mi_negocio/" + res.dataUser._id
+                : window.location.href = "/mi_perfil/" + res.dataUser._id
         } catch (error) {
             console.log(error.msg)
         }
     };
+    console.log(windowSize.width <= 1400)
     return (
-        <Navbar className='nav' expand="xl">
+        <Navbar className='nav' expand="xxl">
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton />
                 <Modal.Body>
@@ -136,12 +138,14 @@ export default function NavBar() {
 
             <Container fluid>
                 <NavLink to={'/'}>
-                    <img src={LogoNav} className="logo" alt="AgroMarketPlace" />
+                    {windowSize.width >= 500
+                        ? <img src={LogoNav} className="logo" alt="AgroMarketPlace" />
+                        : <img src={LogoSmallNav} className="small-logo" alt="AgroMarketPlace" />}
                 </NavLink>
                 {windowSize.width >= 800
                     ? <>
-                        <Form className="d-flex " >
-                            <FloatingLabel controlId="floatingInput"  label="Ingresa el nombre del producto" className="search-textField ">
+                        <Form className="d-flex buscador2" >
+                            <FloatingLabel controlId="floatingInput" label="Ingresa el nombre del producto" className="search-textField ">
                                 <Form.Control className="search-textField" type="text" placeholder="INgresa el nombre del" />
                             </FloatingLabel>
                             <Button className='btnSearch' type="submit">
@@ -150,36 +154,67 @@ export default function NavBar() {
                         </Form>
                         <Navbar.Toggle aria-controls="navbarScroll" />
                         <Navbar.Collapse id="navbarScroll" className="btns-nav">
-                            <Nav navbarScroll >
-                                <NavLink className={'btnNav'} to={'/'}>Inicio</NavLink>
-                                <NavLink className={'btnNav'} to={'/catalogoProductos'}>Catalogo</NavLink>
-                                <NavLink className={'btnNav'} to={'/sobreNosotros'}>Conocenos</NavLink>
-                                {cookies.get('isAuthenticate')
-                                    ? cookies.get('userType') === 'SELLER'
-                                        ? <NavLink className={'btnPerfil'} to={'/mi_negocio/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
-                                        : <NavLink className={'btnPerfil'} to={'/mi_perfil/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
-                                    : <Button onClick={handleShow} className={'btnNav'}>Iniciar Sesion</Button>
+                            <Nav navbarScroll className='navBar'>
+                                {windowSize.width <= 1400
+                                    ? <>
+                                        {cookies.get('isAuthenticate')
+                                            ? cookies.get('userType') === 'SELLER'
+                                                ? <NavLink className={'btnPerfil'} to={'/mi_negocio/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
+                                                : <NavLink className={'btnPerfil'} to={'/mi_perfil/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
+                                            : <Button onClick={handleShow} className={'btnNav'}>Iniciar Sesion</Button>
+                                        }
+                                        <NavLink className={'btnNav'} to={'/'}>Inicio</NavLink>
+                                        <NavLink className={'btnNav'} to={'/catalogoProductos'}>Catalogo</NavLink>
+                                        <NavLink className={'btnNav'} to={'/sobreNosotros'}>Conocenos</NavLink>
+
+                                    </> : <>
+                                        <NavLink className={'btnNav'} to={'/'}>Inicio</NavLink>
+                                        <NavLink className={'btnNav'} to={'/catalogoProductos'}>Catalogo</NavLink>
+                                        <NavLink className={'btnNav'} to={'/sobreNosotros'}>Conocenos</NavLink>
+                                        {cookies.get('isAuthenticate')
+                                            ? cookies.get('userType') === 'SELLER'
+                                                ? <NavLink className={'btnPerfil'} to={'/mi_negocio/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
+                                                : <NavLink className={'btnPerfil'} to={'/mi_perfil/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
+                                            : <Button onClick={handleShow} className={'btnNav'}>Iniciar Sesion</Button>
+                                        }
+                                    </>
                                 }
+
                             </Nav>
                         </Navbar.Collapse>
                     </>
                     : <>
                         <Navbar.Toggle aria-controls="navbarScroll" />
                         <Navbar.Collapse id="navbarScroll" className="btns-nav">
-                            <Nav navbarScroll >
-                                <NavLink className={'btnNav'} to={'/'}>Inicio</NavLink>
-                                <NavLink className={'btnNav'} to={'/catalogoProductos'}>Catalogo</NavLink>
-                                <NavLink className={'btnNav'} to={'/sobreNosotros'}>Conocenos</NavLink>
-                                {cookies.get('isAuthenticate')
-                                    ? cookies.get('userType') === 'SELLER'
-                                        ? <NavLink className={'btnPerfil'} to={'/mi_negocio/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
-                                        : <NavLink className={'btnPerfil'} to={'/mi_perfil/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
-                                    : <Button onClick={handleShow} className={'btnNav'}>Iniciar Sesion</Button>
+                            <Nav navbarScroll  className='navBar'>
+                                {windowSize.width <= 1400
+                                    ? <>
+                                        {cookies.get('isAuthenticate')
+                                            ? cookies.get('userType') === 'SELLER'
+                                                ? <NavLink className={'btnPerfil'} to={'/mi_negocio/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
+                                                : <NavLink className={'btnPerfil'} to={'/mi_perfil/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
+                                            : <Button onClick={handleShow} className={'btnNav'}>Iniciar Sesion</Button>
+                                        }
+                                        <NavLink className={'btnNav'} to={'/'}>Inicio</NavLink>
+                                        <NavLink className={'btnNav'} to={'/catalogoProductos'}>Catalogo</NavLink>
+                                        <NavLink className={'btnNav'} to={'/sobreNosotros'}>Conocenos</NavLink>
+                                    </>
+                                    : <>
+                                        <NavLink className={'btnNav'} to={'/'}>Inicio</NavLink>
+                                        <NavLink className={'btnNav'} to={'/catalogoProductos'}>Catalogo</NavLink>
+                                        <NavLink className={'btnNav'} to={'/sobreNosotros'}>Conocenos</NavLink>
+                                        {cookies.get('isAuthenticate')
+                                            ? cookies.get('userType') === 'SELLER'
+                                                ? <NavLink className={'btnPerfil'} to={'/mi_negocio/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
+                                                : <NavLink className={'btnPerfil'} to={'/mi_perfil/' + cookies.get('idUser')}><FontAwesomeIcon icon={faUser} /></NavLink>
+                                            : <Button onClick={handleShow} className={'btnNav'}>Iniciar Sesion</Button>
+                                        }
+                                    </>
                                 }
                             </Nav>
                         </Navbar.Collapse>
-                        <Form className="d-flex width">
-                            <FloatingLabel controlId="floatingInput" label="Ingresa el nombre del producto" className="search-textField width">
+                        <Form className="d-flex buscador">
+                            <FloatingLabel controlId="floatingInput" label="Ingresa el nombre del producto" className="search-textField">
                                 <Form.Control className="search-textField" type="text" placeholder="INgresa el nombre del" />
                             </FloatingLabel>
                             <Button className='btnSearch' type="submit">
