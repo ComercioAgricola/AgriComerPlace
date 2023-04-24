@@ -78,9 +78,10 @@
     margin-left: 50px;
     display: flex;
     justify-content: center;
-    justify-items: center;
+    align-items: center;
 
-    color: #CBEAE2;
+    color: #CBEAE2 !important;
+    text-decoration: none;
     border-radius: 100% !important;
     background-color: #265073 !important;
 }

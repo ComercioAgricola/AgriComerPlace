@@ -6,7 +6,6 @@ const BuyersSchema = new Schema({
     "user_id": {
         type: Schema.Types.ObjectId,
         ref: 'Users.model',
-        required: [true, "El codigo del usuario es obligatorio."]
     },
     "address": {
         type: String,

@@ -11,6 +11,8 @@ import BuyerProfile from './Components/buyerProfile/buyerProfile';
 import SellerProfile from './Components/SellerProfile/sellerProfile';
 import Registro from './Components/Login/registro';
 import ShoppingCart from './Components/ShoppingCart/shoppingCart';
+import "primereact/resources/themes/lara-light-indigo/theme.css";     
+import "primereact/resources/primereact.min.css";               
 
 function App() {
   return (

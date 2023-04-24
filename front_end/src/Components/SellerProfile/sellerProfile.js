@@ -19,7 +19,6 @@ export default function sellerProfile() {
   return (
     <div>sellerProfile {cookies.get('userSession').name}
       <Button onClick={handleLogout} className='btnNav'>Logout</Button>
-
     </div>
 
   )

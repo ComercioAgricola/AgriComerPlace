@@ -79,7 +79,6 @@ export default function Registro() {
         console.log(error)
       }
     }
-    window.location.href="/"
 
     /*
     auth.createUserWitnEmailAndPassword(email, password).then((auth) => {
