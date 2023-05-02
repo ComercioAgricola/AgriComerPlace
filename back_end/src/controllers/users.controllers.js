@@ -19,7 +19,7 @@ module.exports = class BuyersController {
             const { type, name, email, password, telephone, location, urlImg, address, storeName, storeDescription, accountNumber } = req.body;
             const userFound = await user.findOne({ email: email })
             if (userFound != null) {
-                return res.status(202).json({ success: false, mensaje: 'Ya existe un usuario con el correo ingresado' });
+                return res.status(202).json({success: false, msg: 'Ya existe un usuario con el correo ingresado' });
             }
             const newUser = new user({
                 type: type,
@@ -28,11 +28,9 @@ module.exports = class BuyersController {
                 password: await promisify(bcrypt.hash)(password, saltRounds),
                 telephone: telephone,
                 location: location,
-                urlImg: urlImg != "" ? urlImg : "link imgDefault",
+                urlImg: urlImg,
             });
-            console.log(newUser)
             await newUser.save();
-            console.log("Qui")
             const token = getToken({ email });
             const template = getTemplate(name, token);
             
@@ -54,7 +52,7 @@ module.exports = class BuyersController {
 
             await sendEmail(email, 'Verificacion de la cuenta', template);
 
-            return res.status(200).json({ success: true, msg: 'Registro exitoso' });
+            return res.status(200).json({ success: true, msg: '¡Registro exitoso! Recuerda verificar tu cuenta' });
         } catch (error) {
             console.log(error)
             res.status(404).json({ success: false, msg: error.message });
@@ -87,7 +85,7 @@ module.exports = class BuyersController {
             const { email, password } = req.params;
             const userFound = await user.findOne({ email: email })
 
-            if (!userFound) { return res.json({ success: false, msg: 'email incorrecto' }) }
+            if (!userFound) { return res.status(202).json({ success: false, msg: 'El correo ingresado es incorrecto' }) }
 
             const match = await bcrypt.compare(password, userFound.password);
 
@@ -96,16 +94,16 @@ module.exports = class BuyersController {
                     const token = jwt.sign({ id: userFound._id }, process.env.JWT_SECRET)
                     if (userFound.type != "SELLER") {
                         const dataBuyer = await buyer.findOne({ user_id: userFound._id });
-                        return res.status(200).json({ success: true, msg: 'Inicio de sesion exitoso', userFound, dataBuyer, token });
+                        return res.status(202).json({ success: true, msg: 'Inicio de sesion exitoso', userFound, dataBuyer, token });
                     } else {
                         const dataSeller = await seller.findOne({ user_id: userFound._id });
                         return res.status(200).json({ success: true, msg: 'Inicio de sesion exitoso', userFound, dataSeller, token });
                     }
                 } else {
-                    return res.status(401).json({ success: false, msg: 'la password no coincide' })
+                    return res.status(202).json({ success: false, msg: 'La contraseña ingresada es incorrecta' })
                 }
             } else {
-                return res.status(401).json({ success: false, msg: 'usuario no verificado' })
+                return res.status(202).json({ success: false, msg: 'Tu cuenta no ha sido verificada' })
             }
         } catch (error) {
             return res.status(404).json({ success: false, msg: 'Error al iniciar sesion ' + error.message });

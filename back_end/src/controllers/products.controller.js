@@ -3,7 +3,7 @@ const buyer = require('../models/buyers.model')
 const seller = require('../models/sellers.model')
 const product = require('../models/products.model')
 
-module.exports = class BuyersController {
+module.exports = class ProductsController {
 
     static async getAllProducts(req, res) {
         try {
@@ -14,16 +14,14 @@ module.exports = class BuyersController {
         }
     }
 
-    static async getUserById(req, res) {
+    static async getProductById(id) {
         try {
-            const result = await user.findOne({ _id: req.params.id });
-            result != null
-                ? res.status(200).json({ success: true, msg: "El usuario encontrado es:", result })
-                : res.status(204).json({ success: false, mensaje: 'the buyer user does not exist' });
+          const result = await product.findOne({_id: id })
+          return result;
         } catch (err) {
-            res.status(404).json({ success: false, msg: err.message });
+          res.status(404).json({ message: err.message });
         }
-    }
+      }
 
 
     static async deleteBuyerById(request, response) {

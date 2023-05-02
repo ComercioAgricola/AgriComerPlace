@@ -32,7 +32,7 @@ const UserSchema = new Schema({
     }, 
     "urlImg": {
         type: String,
-        default: "link de la foto por defecto"
+        default: "https://res.cloudinary.com/dymmwpkdg/image/upload/v1682895835/mediaAgroMarketPlace/zcf0qvxjnpqmabjjykkh.svg"
     },
     "state": {
         type: String,

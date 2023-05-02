@@ -8,8 +8,7 @@ const ProductSchema = new Schema({
         required: [true, "El nombre del producto es obligatorio."]
     },
     "category":{
-        type: [String],
-        sparse: true,
+        type: String,
         required: [true, "El producto debe tener al menos una categoria."],
         enum : ['Verdura','Citrico'],
     },
@@ -18,9 +17,9 @@ const ProductSchema = new Schema({
         trim: true,
         required: [true, "El producto necesita una breve descripcion."],
     },
-    "urlsImages": {
-        type: [String],
-        //required: [true, "El producto almenos una foto."],
+    "urlImg": {
+        type: String,
+        required: [true, "El producto almenos una foto."],
     },
     "price": {
         type: Number,
@@ -29,7 +28,7 @@ const ProductSchema = new Schema({
     "unitSale": {
         type: String,
         required: [true, "La unidad de venta del producto es obligatorio."],
-        enum : ['1Kg','1L'],
+        enum : ['kilo','1L'],
     },
     "state":{
         type: String,
