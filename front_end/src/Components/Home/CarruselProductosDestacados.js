@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'primereact/carousel';
-import { ProductService } from './ProductService';
+import { getProductsSeller } from '../../Services/seller.service';
+import { getAllLastProducts } from '../../Services/product.service';
+import { Link } from 'react-router-dom';
+
 
 export default function CarruselProductosDestacados() {
+
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
@@ -38,20 +42,31 @@ export default function CarruselProductosDestacados() {
     ];
 
     useEffect(() => {
-        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
-    }, []);
+        getProductsSellerDB();
+    }, [])
+
+
+
+    const getProductsSellerDB = async () => {
+        const productsDB = await getAllLastProducts();
+        console.log(productsDB)
+        setProducts(productsDB.data.result);
+    }
 
     const productTemplate = (product) => {
         return (
-            <div className=" text-center py-3">
+            <Link to={`/product/${product._id}`}>
+                <div className=" text-center py-3">
                 <div className="mb-3">
-                    <img src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} className="shadow-5" />
+                    <img src={product.urlImg} alt={product.name} className="shadow-5 div-img-carrusel" />
                 </div>
                 <div>
                     <h4 className="mb-1">{product.name}</h4>
                     <h6 className="mt-0 mb-3">${product.price}</h6>
                 </div>
             </div>
+            </Link>
+
         );
     };
 

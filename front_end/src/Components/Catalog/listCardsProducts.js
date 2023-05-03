@@ -7,7 +7,7 @@ import "./catalogo.css"
 export default function listCardsProducts(props) {
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', marginTop:'20px' }}>
       <Grid container  rowSpacing={3} >
         {
           props.products.map((product, i) => (

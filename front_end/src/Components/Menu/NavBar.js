@@ -93,20 +93,20 @@ export default function NavBar() {
             try {
                 const res = (await singIn(userEmail, userPassword)).data;
                 if (res.success === true) {
-                    cookies.set("userType", res.userFound.type, { path: '/' })
-                    cookies.set("idUser", res.userFound._id, { path: '/' })
-                    cookies.set("userSession", res.userFound, { path: '/' })
+                    cookies.set("userType", res.userFound.type,  { path: '/', sameSite:'strict'})
+                    cookies.set("idUser", res.userFound._id, { path: '/' , sameSite:'strict'})
+                    cookies.set("userSession", res.userFound, { path: '/', sameSite:'strict'})
 
                     let route = "";
                     if (res.userFound.type === "SELLER") {
-                        cookies.set("userData", res.dataSeller, { path: '/' })
+                        cookies.set("userData", res.dataSeller, { path: '/', sameSite:'strict'})
                         route = "/mi_negocio/" + res.dataSeller._id
                     } else {
-                        cookies.set("userData", res.dataBuyer, { path: '/' })
+                        cookies.set("userData", res.dataBuyer, { path: '/', sameSite:'strict'})
                         route = "/mi_perfil/" + res.dataBuyer._id
                     }
-                    cookies.set("token", res.token, { path: '/' })
-                    cookies.set("isAuthenticate", true, { path: '/' })
+                    cookies.set("token", res.token, { path: '/', sameSite:'strict'})
+                    cookies.set("isAuthenticate", true, { path: '/', sameSite:'strict'})
                     window.location.href = route
                 } else {
                     setmessageError(res.msg)

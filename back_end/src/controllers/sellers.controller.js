@@ -1,7 +1,6 @@
 const seller = require('../models/sellers.model')
 const product = require('../models/products.model')
 const jwt = require('jsonwebtoken');
-const { getProductById } = require('./products.controller');
 
 
 module.exports = class SellersController {
@@ -92,7 +91,6 @@ module.exports = class SellersController {
 
   static async deleteProduct(req, res) {
     try {
-      console.log("hola")
       const idSeller = req.params.idSeller
       const idProduct = req.params.idProduct
 

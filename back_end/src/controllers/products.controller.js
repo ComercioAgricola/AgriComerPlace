@@ -14,6 +14,19 @@ module.exports = class ProductsController {
         }
     }
 
+    static async getAllLastProducts(req, res) {
+        try {
+            let result = await product.find({});
+
+            result = result.reverse().slice(0,20)
+            res.status(200).json({ success: true, msg: "Los productos en la db son:", result });
+        } catch (err) {
+            response.status(404).json({ success: false, msg: err.message });
+        }
+    }
+
+    
+
     static async getProductById(id) {
         try {
           const result = await product.findOne({_id: id })

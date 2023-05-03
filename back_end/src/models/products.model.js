@@ -10,7 +10,7 @@ const ProductSchema = new Schema({
     "category":{
         type: String,
         required: [true, "El producto debe tener al menos una categoria."],
-        enum : ['Verdura','Citrico'],
+        enum : ['Frutas','Verduras','Granos','Frutos Secos','Especias'],
     },
     "description": {
         type: String,
@@ -28,7 +28,7 @@ const ProductSchema = new Schema({
     "unitSale": {
         type: String,
         required: [true, "La unidad de venta del producto es obligatorio."],
-        enum : ['kilo','1L'],
+        enum : ['Libra','Kilo','Arroba'],
     },
     "state":{
         type: String,

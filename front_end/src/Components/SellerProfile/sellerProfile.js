@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Cookies from "universal-cookie"
 import { TabView, TabPanel } from 'primereact/tabview';
 import { DataTable } from 'primereact/datatable';
@@ -12,6 +12,7 @@ import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
+import { Toast } from 'primereact/toast';
 
 
 import './sellerProfile.css'
@@ -27,7 +28,7 @@ function SellerProfile() {
   const [refresh, setRefresh] = useState(true);
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState("");
-  const [showMessage, setshowMessage] = useState(false);
+  const [showMessage, setshowMessage] = useState("Bienvenido");
   const [nameProduct, setNameProduct] = useState("");
   const [categoryProduct, setCategoryProduct] = useState([]);
   const [descriptionProduct, setDescriptionProduct] = useState("");
@@ -37,30 +38,42 @@ function SellerProfile() {
   const [unitSaleProduct, setUnitSaleProduct] = useState("Selecciona una");
   const [user, setUser] = useState(cookies.get('userSession'))
   const [dataUser, setDataUser] = useState(cookies.get('userData'))
-  const [productsSeller, setProductsSeller] = useState([])
-
+  const [productsSeller, setProductsSeller] = useState()
+  const toast = useRef(null);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true)
+    setNameProduct("")
+    setCategoryProduct("Selecciona una")
+    setDescriptionProduct("")
+    setUnitSaleProduct("Selecciona una")
+    setPriceProduct(0);
+    setUrlImageProduct("")
+    setImageProduct("")
+  };
 
-  const handleCloseEdit = () => setShowEdit(false);
-  const handleShowEdit = () => setShowEdit(true);
+  const handleCloseEdit = () => {
+    setShowEdit(false)
+  };
+  const handleShowEdit = () => {setShowEdit(true)};
 
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = () => setShowDelete(true);
 
   useEffect(() => {
-    const getProductsSellerDB = async () => {
-
-      const productsDB = await getProductsSeller(dataUser._id);
-      setProductsSeller(productsDB.data.auxProducts);
-    }
     getProductsSellerDB();
-  }, [refresh])
-
+  }, [])
+  
   useEffect(() => {
     uploadImage();
   }, [imageProduct])
-
+  
+  
+  const getProductsSellerDB = async () => {
+    const productsDB = await getProductsSeller(dataUser._id);
+    setProductsSeller(productsDB.data.auxProducts);
+  }
+  
   const uploadImage = async () => {
     setUrlImageProduct(undefined)
     if (imageProduct !== "" && imageProduct !== undefined) {
@@ -93,13 +106,10 @@ function SellerProfile() {
 
   const header = (
     <div className="div-header flex-wrap align-items-center justify-content-between gap-2">
-      <span className="text-xl text-900 font-bold">Products</span>
-      <Button onClick={handleShow}>
+      <span className="text-xl text-900 font-bold">Lista de productos</span>
+      <Button className="btn-table-header" onClick={handleShow}>
         Crear producto
       </Button>
-      {/* <Button onClick={handleShow}>
-        <FontAwesomeIcon icon={faPlus} />
-      </Button> */}
     </div>
   );
 
@@ -119,9 +129,10 @@ function SellerProfile() {
         description: descriptionProduct
       }
       try {
-        console.log(newProduct)
         const res = await (await createNewProduct(dataUser._id, newProduct)).data
-        setRefresh(urlImageProduct)
+        handleClose();
+        getProductsSellerDB();
+        toast.current.show({ severity: 'success', summary: 'Notificacion', detail: res.msg, life: 8000 });
         setNameProduct("")
         setCategoryProduct("Selecciona una")
         setDescriptionProduct("")
@@ -138,9 +149,15 @@ function SellerProfile() {
 
   const actionBodyTemplate = (rowData) => {
     return (
-      <React.Fragment>
-        <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editProduct(rowData)} />
-        <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteProduct(rowData)} />
+      <React.Fragment >
+        <div className='btns-table'>
+          <Button rounded outlined className="mr-2 btn-table-edit" onClick={() => editProduct(rowData)}>
+            Editar
+          </Button>
+          <Button rounded outlined className="btn-table-delete" severity="danger" onClick={() => confirmDeleteProduct(rowData)}>
+            Eliminar
+          </Button>
+        </div>
       </React.Fragment>
     );
   };
@@ -163,14 +180,13 @@ function SellerProfile() {
     handleShowDelete();
   };
 
-  const handleDeleteProduct = async () =>{
+  const handleDeleteProduct = async () => {
     try {
-      console.log(dataUser._id)
-      console.log(idProductSelect)
-      const res = await (await deleteProduct(dataUser._id,idProductSelect)).data
-      console.log(res)
-      setRefresh(idProductSelect)
-      handleCloseDelete()
+
+      const res = await (await deleteProduct(dataUser._id, idProductSelect)).data
+      getProductsSellerDB();
+      handleCloseDelete();
+      toast.current.show({ severity: 'success', summary: 'Notificacion', detail: res.msg, life: 8000 });
     } catch (error) {
       console.log(error)
     }
@@ -193,8 +209,16 @@ function SellerProfile() {
       }
       try {
         const res = await (await updateProduct(idProductSelect, updateDataProduct)).data
-        setRefresh(idProductSelect)
-        handleCloseEdit()
+        toast.current.show({ severity: 'success', summary: 'Notificacion', detail: res.msg, life: 8000 });
+        getProductsSellerDB();
+        handleCloseEdit();
+        setNameProduct("")
+        setCategoryProduct("Selecciona una")
+        setDescriptionProduct("")
+        setUnitSaleProduct("Selecciona una")
+        setPriceProduct(0);
+        setUrlImageProduct("")
+        setImageProduct("")
       } catch (error) {
         console.log(error)
       }
@@ -203,6 +227,8 @@ function SellerProfile() {
   }
   return (
     <>
+      <Toast ref={toast} />
+
       <Modal
         show={show}
         onHide={handleClose}
@@ -235,8 +261,11 @@ function SellerProfile() {
                   onChange={({ target }) => setCategoryProduct(target.value)}
                 >
                   <option>Selecciona una</option>
-                  <option>Verdura</option>
-                  <option>Opcion 2</option>
+                  <option>Frutas</option>
+                  <option>Verduras</option>
+                  <option>Granos</option>
+                  <option>Frutos Secos</option>
+                  <option>Especias</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   Por favor selecciona una opcion.
@@ -249,8 +278,9 @@ function SellerProfile() {
                   onChange={({ target }) => setUnitSaleProduct(target.value !== "Selecciona una" ? target.value : undefined)}
                 >
                   <option>Selecciona una</option>
+                  <option>Libra</option>
                   <option>Kilo</option>
-                  <option>kilo</option>
+                  <option>Arroba</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   Por favor selecciona una opcion.
@@ -318,12 +348,14 @@ function SellerProfile() {
         <Modal.Body>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
             <Form noValidate validated={validated} onSubmit={editSelectProduct} className='modal-form'>
-              <img src={urlImageProduct} alt='imagenProducto' />
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label>Imagen del producto:</Form.Label>
+              <div className='div-img-edit'>
+                <img src={urlImageProduct} alt='imagenProducto' className='img-edit' />
+
+              </div>
                 <Form.Control
                   type="file"
-                  required
                   onChange={({ target }) => setImageProduct(target.files[0])}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -351,8 +383,11 @@ function SellerProfile() {
                   onChange={({ target }) => setCategoryProduct(target.value)}
                 >
                   <option>Selecciona una</option>
-                  <option>Verdura</option>
-                  <option>Opcion 2</option>
+                  <option>Frutas</option>
+                  <option>Verduras</option>
+                  <option>Granos</option>
+                  <option>Frutos Secos</option>
+                  <option>Especias</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   Por favor selecciona una opcion.
@@ -366,8 +401,9 @@ function SellerProfile() {
                   onChange={({ target }) => setUnitSaleProduct(target.value !== "Selecciona una" ? target.value : undefined)}
                 >
                   <option>Selecciona una</option>
+                  <option>Libra</option>
                   <option>Kilo</option>
-                  <option>kilo</option>
+                  <option>Arroba</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   Por favor selecciona una opcion.
@@ -402,7 +438,7 @@ function SellerProfile() {
                 </Form.Control.Feedback>
               </Form.Group>
               <Container fluid className='container-butons'>
-                <Button className='form-buttons' onClick={handleCloseEdit}>
+                <Button className='form-buttons' type='button' onClick={handleCloseEdit}>
                   Cancelar
                 </Button>
                 <Button type='submit' className='form-buttons'>Actualizar</Button>
@@ -420,24 +456,25 @@ function SellerProfile() {
         scrollable
       >
         <Modal.Header closeButton>
-          <Modal.Title>Edicion de producto</Modal.Title>
+          <Modal.Title>Eliminacion de producto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-            <img src={urlImageProduct} alt='imagenProducto' />
-            <h1>¿Esta seguro que desea eliminar el producto {nameProduct} ?</h1>
+            <img src={urlImageProduct} alt='imagenProducto' className='img-delete' />
+            <h1>{nameProduct}</h1>
+            <p className='p-delete-product'>¿Estas seguro quieres eliminar este producto?</p>
             <Container fluid className='container-butons'>
-              <Button className='form-buttons' onClick={handleCloseDelete}>
+              <Button className='form-button-cancelar' onClick={handleCloseDelete}>
                 Cancelar
               </Button>
-              <Button onClick={handleDeleteProduct} className='form-buttons'>Eliminar</Button>
+              <Button onClick={handleDeleteProduct} className='form-button-delete'>Eliminar</Button>
             </Container>
           </Box>
         </Modal.Body>
       </Modal>
 
       <Box sx={{ width: '100%' }}>
-        <Grid container >
+        <Grid container className='div-grid-c'>
           <Grid item xs={12} sm={12} md={6} lg={4} xl={4} className='div-grid-img'>
             <div className='grid-div'>
               <img className='div-img' src={user.urlImg} alt='imagenPerfil' />
@@ -462,7 +499,7 @@ function SellerProfile() {
                 <Column field="name" sortable frozen header="Nombre"></Column>
                 <Column field="price" sortable header="Precio"></Column>
                 <Column field="category" sortable header="Categoria"></Column>
-                <Column field="urlsImage" header="Categoria"></Column>
+                <Column field="unitSale" sortable header="Unidad de venta"></Column>
                 <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
 
               </DataTable>
@@ -474,7 +511,7 @@ function SellerProfile() {
         </TabView>
       </div>
 
-      <Button onClick={handleLogout} className='btnNav'>Logout</Button>
+      <Button onClick={handleLogout} className='btnLogout'>Logout</Button>
 
     </>
   )

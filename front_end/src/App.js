@@ -10,6 +10,7 @@ import AboutUs from './Components/AboutUs/AboutUs';
 import BuyerProfile from './Components/buyerProfile/buyerProfile';
 import SellerProfile from './Components/SellerProfile/sellerProfile';
 import Registro from './Components/Login/registro';
+import SelectedProduct from './Components/selectedProduct/selectedProduct';
 import ShoppingCart from './Components/ShoppingCart/shoppingCart';
 import "primereact/resources/themes/lara-light-indigo/theme.css";     
 import "primereact/resources/primereact.min.css";               
@@ -26,6 +27,7 @@ function App() {
             <Route path="/catalogoProductos" element={<Catalog />} />
             <Route path="/mi_negocio/:idSeller" element={<SellerProfile />} />
             <Route path="/mi_perfil/:idBuyer" element={<BuyerProfile />} />
+            <Route path="/product/:idProduct" element={<SelectedProduct />} />
             <Route path="/carrito" element={<ShoppingCart />} />
             <Route path="/registro" element={<Registro />} />
           </Routes>

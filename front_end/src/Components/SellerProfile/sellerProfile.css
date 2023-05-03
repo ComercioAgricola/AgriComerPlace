@@ -9,6 +9,29 @@
     display: flex;
     align-items: center;
 }
+.btnLogout{
+    background-color: #265073 !important;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.div-grid-c{
+    background-color: rgba(203, 234, 226, 0.7);
+    padding-bottom: 20px;
+}
+.img-delete{
+    width: 70% ;
+    margin-bottom: 20px;
+}
+.img-edit{
+    width: 70%;
+    margin-bottom: 20px;
+}
+.div-img-edit{
+    display: flex;
+    justify-content: center;
+}
 .div-header{
     display: flex;
 }
@@ -30,6 +53,35 @@
 }
 .clasuper{
     width: 40rem ;
+}
+.btns-table{
+    display: flex;
+    justify-content: flex-end;
+}
+.btn-table-edit{
+    border: 1px solid #265073 !important;
+    color: #265073 !important;
+    margin-right: 20px !important;
+}
+.form-button-cancelar{
+    background-color: #b8b1b1 !important;
+    border: none !important;
+}
+.btn-table-header{
+    background-color: #265073 !important;
+    
+}
+.p-delete-product{
+    text-align: center;
+    font-size: x-large;
+}
+.form-button-delete{
+    background-color: #EF4444 !important;
+    border: none !important;
+    color: white;
+}
+.btn-table-delete{
+    margin-right: 20px !important;
 }
 .container-butons{
     display: flex;

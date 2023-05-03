@@ -18,8 +18,8 @@ export default function Proveedores() {
    
   return (
     <div>
-      <h1>Catalogo</h1>
-      {products.length !== 0 ? <ListCardsProducts products={products}/>:<ImgCargando/>}
+      <h1>Lista de productos</h1>
+      {products.length !== 0 ? <ListCardsProducts  products={products}/>:<ImgCargando/>}
     </div>
   )
 }
